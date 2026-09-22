@@ -1,0 +1,2350 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="VOYA — A beautifully planned luxury travel experience.">
+<title>VOYA — Travel, Beautifully Planned.</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+:root{
+    --cream:#f7f4ed;
+    --ivory:#fcfaf5;
+    --green:#173b35;
+    --green2:#28564d;
+    --sage:#9daea1;
+    --gold:#b69b63;
+    --dark:#16221f;
+    --text:#26332f;
+    --muted:#7c8580;
+    --white:#fff;
+    --border:rgba(23,59,53,.12);
+    --shadow:0 20px 60px rgba(20,40,35,.12);
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:"DM Sans",sans-serif;
+    background:var(--cream);
+    color:var(--text);
+    overflow-x:hidden;
+}
+
+h1,h2,h3,h4{
+    font-family:"Playfair Display",serif;
+}
+
+button,input,select{
+    font-family:inherit;
+}
+
+button{
+    cursor:pointer;
+}
+
+a{
+    text-decoration:none;
+    color:inherit;
+}
+
+/* NAVBAR */
+
+.navbar{
+    position:fixed;
+    top:0;
+    left:0;
+    right:0;
+    z-index:1000;
+    padding:20px 6%;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    color:white;
+    transition:.4s;
+}
+
+.navbar.scrolled{
+    background:rgba(252,250,245,.96);
+    color:var(--green);
+    box-shadow:0 5px 30px rgba(0,0,0,.08);
+    backdrop-filter:blur(15px);
+}
+
+.logo{
+    font-family:"Playfair Display",serif;
+    font-size:30px;
+    letter-spacing:5px;
+    font-weight:600;
+}
+
+.logo span{
+    color:var(--gold);
+}
+
+.navlinks{
+    display:flex;
+    gap:28px;
+    align-items:center;
+}
+
+.navlinks a{
+    font-size:13px;
+    position:relative;
+}
+
+.navlinks a::after{
+    content:"";
+    position:absolute;
+    width:0;
+    height:1px;
+    background:currentColor;
+    left:0;
+    bottom:-7px;
+    transition:.3s;
+}
+
+.navlinks a:hover::after{
+    width:100%;
+}
+
+.nav-actions{
+    display:flex;
+    gap:10px;
+    align-items:center;
+}
+
+.icon-btn{
+    border:1px solid rgba(255,255,255,.4);
+    background:rgba(255,255,255,.1);
+    color:inherit;
+    width:42px;
+    height:42px;
+    border-radius:50%;
+    transition:.3s;
+}
+
+.scrolled .icon-btn{
+    border-color:var(--border);
+    background:white;
+}
+
+.icon-btn:hover{
+    transform:translateY(-2px);
+}
+
+.menu{
+    display:none;
+}
+
+/* HERO */
+
+.hero{
+    min-height:100vh;
+    position:relative;
+    display:flex;
+    align-items:center;
+    color:white;
+    overflow:hidden;
+    background:
+    linear-gradient(90deg,rgba(5,24,20,.78),rgba(5,24,20,.22)),
+    url("https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=2200&q=90")
+    center/cover;
+}
+
+.hero::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:linear-gradient(0deg,rgba(5,20,17,.65),transparent 45%);
+}
+
+.hero-content{
+    position:relative;
+    z-index:2;
+    width:min(1200px,88%);
+    margin:auto;
+    padding-top:70px;
+}
+
+.eyebrow{
+    text-transform:uppercase;
+    letter-spacing:4px;
+    font-size:11px;
+    color:#d7c9a8;
+    margin-bottom:20px;
+}
+
+.hero h1{
+    font-size:clamp(58px,8vw,112px);
+    line-height:.94;
+    max-width:850px;
+    font-weight:500;
+}
+
+.hero h1 em{
+    color:#e5d4ad;
+    font-style:italic;
+}
+
+.hero-text{
+    max-width:500px;
+    margin:30px 0;
+    line-height:1.8;
+    color:rgba(255,255,255,.84);
+}
+
+.primary-btn{
+    border:none;
+    background:var(--gold);
+    color:white;
+    padding:15px 25px;
+    border-radius:2px;
+    font-weight:600;
+    transition:.3s;
+}
+
+.primary-btn:hover{
+    background:#967e4d;
+    transform:translateY(-2px);
+}
+
+.secondary-btn{
+    padding:14px 24px;
+    background:transparent;
+    color:white;
+    border:1px solid rgba(255,255,255,.5);
+    margin-left:10px;
+    transition:.3s;
+}
+
+.secondary-btn:hover{
+    background:white;
+    color:var(--green);
+}
+
+/* SEARCH */
+
+.search-panel{
+    position:absolute;
+    z-index:5;
+    bottom:35px;
+    left:50%;
+    transform:translateX(-50%);
+    width:min(1100px,90%);
+    background:rgba(255,255,255,.96);
+    color:var(--dark);
+    padding:12px;
+    display:grid;
+    grid-template-columns:1.5fr 1fr 1fr 1fr auto;
+    box-shadow:var(--shadow);
+}
+
+.search-field{
+    padding:13px 18px;
+    border-right:1px solid var(--border);
+}
+
+.search-field label{
+    display:block;
+    font-size:9px;
+    letter-spacing:2px;
+    color:var(--muted);
+    margin-bottom:6px;
+    font-weight:bold;
+}
+
+.search-field input,
+.search-field select{
+    width:100%;
+    border:none;
+    outline:none;
+    background:transparent;
+    font-size:14px;
+    color:var(--dark);
+}
+
+.search-btn{
+    border:none;
+    background:var(--green);
+    color:white;
+    padding:0 25px;
+    font-weight:600;
+}
+
+/* GENERAL */
+
+section{
+    padding:110px 6%;
+}
+
+.section-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:end;
+    margin-bottom:45px;
+}
+
+.section-head h2{
+    font-size:48px;
+    font-weight:500;
+    color:var(--green);
+}
+
+.section-head p{
+    max-width:450px;
+    line-height:1.7;
+    color:var(--muted);
+}
+
+.view-link{
+    color:var(--green);
+    font-size:13px;
+    border-bottom:1px solid var(--gold);
+    padding-bottom:5px;
+}
+
+/* DESTINATIONS */
+
+.destination-grid{
+    display:grid;
+    grid-template-columns:1.5fr 1fr 1fr;
+    grid-template-rows:260px 260px;
+    gap:18px;
+}
+
+.destination{
+    position:relative;
+    overflow:hidden;
+    border-radius:2px;
+    color:white;
+    cursor:pointer;
+}
+
+.destination:first-child{
+    grid-row:span 2;
+}
+
+.destination img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    transition:1s;
+}
+
+.destination:hover img{
+    transform:scale(1.08);
+}
+
+.destination::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:linear-gradient(0deg,rgba(0,0,0,.7),transparent 60%);
+}
+
+.destination-info{
+    position:absolute;
+    bottom:25px;
+    left:25px;
+    z-index:2;
+}
+
+.destination-info small{
+    text-transform:uppercase;
+    letter-spacing:2px;
+    font-size:9px;
+}
+
+.destination-info h3{
+    font-size:29px;
+    margin-top:5px;
+}
+
+/* STYLES */
+
+.styles{
+    background:var(--green);
+    color:white;
+}
+
+.styles .section-head h2{
+    color:white;
+}
+
+.styles .section-head p{
+    color:#b9c6c0;
+}
+
+.style-grid{
+    display:grid;
+    grid-template-columns:repeat(6,1fr);
+    gap:12px;
+}
+
+.style-card{
+    height:310px;
+    position:relative;
+    overflow:hidden;
+    cursor:pointer;
+}
+
+.style-card img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    transition:.8s;
+}
+
+.style-card:hover img{
+    transform:scale(1.08);
+}
+
+.style-card::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:linear-gradient(0deg,rgba(0,0,0,.7),transparent 65%);
+}
+
+.style-card div{
+    position:absolute;
+    bottom:20px;
+    left:18px;
+    z-index:2;
+}
+
+.style-card h3{
+    font-size:23px;
+}
+
+.style-card p{
+    font-size:11px;
+    opacity:.8;
+    margin-top:4px;
+}
+
+/* TRIP BUILDER */
+
+.builder{
+    background:var(--ivory);
+}
+
+.builder-box{
+    background:white;
+    box-shadow:var(--shadow);
+    display:grid;
+    grid-template-columns:1fr 1.4fr;
+    min-height:500px;
+}
+
+.builder-image{
+    background:url("https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=1200&q=85") center/cover;
+}
+
+.builder-content{
+    padding:55px;
+}
+
+.builder-content h2{
+    font-size:50px;
+    color:var(--green);
+    margin-bottom:15px;
+}
+
+.builder-content > p{
+    color:var(--muted);
+    line-height:1.7;
+    margin-bottom:35px;
+}
+
+.progress{
+    height:3px;
+    background:#e7e3da;
+    margin-bottom:35px;
+}
+
+.progress span{
+    display:block;
+    width:25%;
+    height:100%;
+    background:var(--gold);
+}
+
+.builder-step{
+    display:none;
+}
+
+.builder-step.active{
+    display:block;
+    animation:fadeUp .5s;
+}
+
+.builder-step h3{
+    font-size:28px;
+    margin-bottom:20px;
+}
+
+.options{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+}
+
+.option{
+    padding:12px 18px;
+    border:1px solid var(--border);
+    background:white;
+    transition:.3s;
+}
+
+.option:hover,
+.option.selected{
+    background:var(--green);
+    color:white;
+}
+
+.builder-footer{
+    margin-top:35px;
+    display:flex;
+    justify-content:space-between;
+}
+
+/* EXPERIENCES */
+
+.experience-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:18px;
+}
+
+.experience{
+    background:white;
+    box-shadow:0 8px 30px rgba(0,0,0,.06);
+    overflow:hidden;
+}
+
+.experience-img{
+    height:240px;
+    position:relative;
+    overflow:hidden;
+}
+
+.experience-img img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    transition:.7s;
+}
+
+.experience:hover img{
+    transform:scale(1.06);
+}
+
+.heart{
+    position:absolute;
+    top:14px;
+    right:14px;
+    width:36px;
+    height:36px;
+    border:none;
+    border-radius:50%;
+    background:white;
+    font-size:17px;
+}
+
+.experience-content{
+    padding:20px;
+}
+
+.tag{
+    font-size:9px;
+    letter-spacing:2px;
+    color:var(--gold);
+    text-transform:uppercase;
+}
+
+.experience h3{
+    font-size:23px;
+    margin:8px 0;
+}
+
+.rating{
+    font-size:12px;
+    color:#a18448;
+}
+
+.price{
+    margin-top:15px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.price strong{
+    color:var(--green);
+}
+
+/* HOTELS */
+
+.hotels{
+    background:#ece9df;
+}
+
+.hotel-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:20px;
+}
+
+.hotel{
+    background:white;
+}
+
+.hotel-image{
+    height:300px;
+    overflow:hidden;
+}
+
+.hotel-image img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    transition:.7s;
+}
+
+.hotel:hover img{
+    transform:scale(1.05);
+}
+
+.hotel-content{
+    padding:24px;
+}
+
+.hotel-content h3{
+    font-size:27px;
+    color:var(--green);
+}
+
+.hotel-location{
+    color:var(--muted);
+    font-size:12px;
+    margin:7px 0;
+}
+
+.amenities{
+    display:flex;
+    gap:8px;
+    flex-wrap:wrap;
+    margin-top:15px;
+}
+
+.amenities span{
+    background:#f4f2ec;
+    padding:6px 9px;
+    font-size:10px;
+}
+
+/* FOOD */
+
+.food{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:70px;
+    align-items:center;
+}
+
+.food-image{
+    height:620px;
+    background:url("https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1200&q=85") center/cover;
+}
+
+.food-content h2{
+    font-size:58px;
+    color:var(--green);
+    line-height:1.05;
+}
+
+.food-content p{
+    color:var(--muted);
+    line-height:1.8;
+    margin:25px 0;
+}
+
+.food-list{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:12px;
+    margin:30px 0;
+}
+
+.food-item{
+    padding:18px;
+    background:white;
+    border:1px solid var(--border);
+}
+
+.food-item strong{
+    display:block;
+    color:var(--green);
+    margin-bottom:5px;
+}
+
+/* GUIDES */
+
+.guide-grid{
+    display:grid;
+    grid-template-columns:2fr 1fr 1fr;
+    gap:18px;
+}
+
+.guide{
+    position:relative;
+    height:400px;
+    overflow:hidden;
+    color:white;
+}
+
+.guide img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    transition:.7s;
+}
+
+.guide:hover img{
+    transform:scale(1.06);
+}
+
+.guide::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:linear-gradient(0deg,rgba(0,0,0,.8),transparent 65%);
+}
+
+.guide-info{
+    position:absolute;
+    bottom:25px;
+    left:25px;
+    right:20px;
+    z-index:2;
+}
+
+.guide-info small{
+    letter-spacing:2px;
+    text-transform:uppercase;
+    color:#e2d3b1;
+}
+
+.guide-info h3{
+    font-size:27px;
+    margin-top:8px;
+}
+
+/* BUDGET */
+
+.budget{
+    background:var(--green);
+    color:white;
+    text-align:center;
+}
+
+.budget h2{
+    font-size:55px;
+}
+
+.budget p{
+    color:#b7c5bf;
+    max-width:600px;
+    margin:15px auto 35px;
+    line-height:1.7;
+}
+
+.budget-box{
+    max-width:850px;
+    margin:auto;
+    background:#224a42;
+    padding:35px;
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:1px;
+}
+
+.budget-item{
+    padding:20px;
+    border-right:1px solid rgba(255,255,255,.1);
+}
+
+.budget-item small{
+    color:#a9bbb4;
+    display:block;
+    margin-bottom:8px;
+}
+
+.budget-item strong{
+    font-size:25px;
+}
+
+/* TESTIMONIAL */
+
+.testimonial{
+    text-align:center;
+    max-width:850px;
+    margin:auto;
+}
+
+.quote{
+    font-family:"Playfair Display",serif;
+    font-size:40px;
+    line-height:1.35;
+    color:var(--green);
+}
+
+.quote-author{
+    margin-top:25px;
+    color:var(--muted);
+}
+
+/* NEWSLETTER */
+
+.newsletter{
+    background:#dedbd0;
+    text-align:center;
+}
+
+.newsletter h2{
+    font-size:50px;
+    color:var(--green);
+}
+
+.newsletter p{
+    color:var(--muted);
+    margin:15px auto 25px;
+}
+
+.newsletter-form{
+    max-width:550px;
+    margin:auto;
+    display:flex;
+    background:white;
+    padding:6px;
+}
+
+.newsletter-form input{
+    flex:1;
+    border:none;
+    outline:none;
+    padding:14px;
+}
+
+/* FOOTER */
+
+footer{
+    background:#102c27;
+    color:white;
+    padding:70px 6% 25px;
+}
+
+.footer-grid{
+    display:grid;
+    grid-template-columns:2fr 1fr 1fr 1fr;
+    gap:50px;
+    padding-bottom:50px;
+}
+
+.footer-brand p{
+    color:#9cafaa;
+    max-width:330px;
+    line-height:1.7;
+    margin-top:15px;
+}
+
+footer h4{
+    font-family:"DM Sans";
+    margin-bottom:18px;
+}
+
+footer a{
+    display:block;
+    color:#9cafaa;
+    font-size:13px;
+    margin:10px 0;
+}
+
+.footer-bottom{
+    border-top:1px solid rgba(255,255,255,.1);
+    padding-top:22px;
+    display:flex;
+    justify-content:space-between;
+    color:#758b84;
+    font-size:11px;
+}
+
+/* MODAL */
+
+.modal{
+    position:fixed;
+    inset:0;
+    background:rgba(5,20,17,.7);
+    backdrop-filter:blur(8px);
+    z-index:2000;
+    display:none;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+}
+
+.modal.active{
+    display:flex;
+}
+
+.modal-box{
+    background:var(--ivory);
+    width:min(650px,100%);
+    padding:45px;
+    position:relative;
+    animation:fadeUp .4s;
+}
+
+.close{
+    position:absolute;
+    right:20px;
+    top:20px;
+    border:none;
+    background:none;
+    font-size:25px;
+}
+
+.modal-box h2{
+    color:var(--green);
+    font-size:42px;
+}
+
+.modal-box p{
+    color:var(--muted);
+    line-height:1.7;
+    margin:15px 0 25px;
+}
+
+.form-group{
+    margin-bottom:15px;
+}
+
+.form-group label{
+    font-size:11px;
+    display:block;
+    margin-bottom:7px;
+    color:var(--muted);
+}
+
+.form-group input,
+.form-group select{
+    width:100%;
+    padding:13px;
+    border:1px solid var(--border);
+    outline:none;
+    background:white;
+}
+
+/* TOAST */
+
+.toast{
+    position:fixed;
+    right:25px;
+    bottom:25px;
+    background:var(--green);
+    color:white;
+    padding:15px 22px;
+    z-index:3000;
+    transform:translateY(120px);
+    transition:.4s;
+    box-shadow:var(--shadow);
+}
+
+.toast.show{
+    transform:translateY(0);
+}
+
+/* ANIMATION */
+
+@keyframes fadeUp{
+    from{
+        opacity:0;
+        transform:translateY(25px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+.reveal{
+    opacity:0;
+    transform:translateY(30px);
+    transition:.8s;
+}
+
+.reveal.visible{
+    opacity:1;
+    transform:translateY(0);
+}
+
+/* RESPONSIVE */
+
+@media(max-width:1000px){
+
+    .navlinks{
+        display:none;
+    }
+
+    .menu{
+        display:block;
+    }
+
+    .mobile-nav-panel{
+        position:fixed;
+        top:72px;
+        right:20px;
+        left:20px;
+        z-index:999;
+        background:rgba(20,35,30,.97);
+        color:white;
+        border-radius:18px;
+        padding:18px 16px;
+        display:none;
+        flex-direction:column;
+        gap:12px;
+        box-shadow:0 18px 40px rgba(0,0,0,.18);
+    }
+
+    .mobile-nav-panel.show{
+        display:flex;
+    }
+
+    .mobile-nav-panel a{
+        font-size:14px;
+        padding:10px 8px;
+        border-bottom:1px solid rgba(255,255,255,.08);
+    }
+
+    .search-panel{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .search-btn{
+        min-height:50px;
+    }
+
+    .destination-grid{
+        grid-template-columns:1fr 1fr;
+        grid-template-rows:300px 220px 220px;
+    }
+
+    .destination:first-child{
+        grid-column:span 2;
+        grid-row:auto;
+    }
+
+    .style-grid{
+        grid-template-columns:repeat(3,1fr);
+    }
+
+    .experience-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .hotel-grid{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .food{
+        grid-template-columns:1fr;
+    }
+
+    .guide-grid{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .footer-grid{
+        grid-template-columns:1fr 1fr;
+    }
+}
+
+@media(max-width:650px){
+
+    section{
+        padding:75px 5%;
+    }
+
+    .hero{
+        min-height:900px;
+    }
+
+    .hero h1{
+        font-size:58px;
+    }
+
+    .hero-content{
+        padding-top:30px;
+    }
+
+    .search-panel{
+        bottom:20px;
+        grid-template-columns:1fr;
+        border-radius:18px;
+        overflow:hidden;
+    }
+
+    .search-field{
+        border-right:none;
+        border-bottom:1px solid var(--border);
+        padding:16px 18px;
+    }
+
+    .search-btn{
+        min-height:56px;
+        font-size:15px;
+    }
+
+    .section-head{
+        display:block;
+    }
+
+    .section-head h2{
+        font-size:38px;
+        margin-bottom:15px;
+    }
+
+    .destination-grid,
+    .style-grid,
+    .experience-grid,
+    .hotel-grid,
+    .guide-grid{
+        grid-template-columns:1fr;
+    }
+
+    .destination:first-child{
+        grid-column:auto;
+    }
+
+    .destination-grid{
+        grid-template-rows:auto;
+    }
+
+    .destination{
+        height:280px;
+    }
+
+    .style-card{
+        height:260px;
+    }
+
+    .builder-box{
+        grid-template-columns:1fr;
+    }
+
+    .builder-image{
+        min-height:300px;
+    }
+
+    .builder-content{
+        padding:30px;
+    }
+
+    .builder-content h2,
+    .food-content h2,
+    .newsletter h2,
+    .budget h2{
+        font-size:40px;
+    }
+
+    .food-image{
+        height:400px;
+    }
+
+    .budget-box{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .quote{
+        font-size:28px;
+    }
+
+    .footer-grid{
+        grid-template-columns:1fr;
+    }
+
+    .footer-bottom{
+        display:block;
+        line-height:2;
+    }
+
+    .mobile-tabbar{
+        position:fixed;
+        left:12px;
+        right:12px;
+        bottom:12px;
+        z-index:1500;
+        display:flex;
+        justify-content:space-around;
+        align-items:center;
+        padding:12px 8px 10px;
+        background:rgba(16,44,39,.96);
+        border:1px solid rgba(255,255,255,.08);
+        border-radius:22px;
+        box-shadow:0 20px 50px rgba(0,0,0,.22);
+        backdrop-filter:blur(18px);
+    }
+
+    .mobile-tabbar a{
+        flex:1;
+        text-align:center;
+        color:rgba(255,255,255,.8);
+        font-size:11px;
+        padding:8px 4px;
+    }
+
+    .mobile-tabbar a strong{
+        display:block;
+        font-size:18px;
+        line-height:1;
+        margin-bottom:4px;
+        color:white;
+    }
+
+    body{
+        padding-bottom:78px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+
+<nav class="navbar" id="navbar">
+
+    <a href="#" class="logo">VOYA<span>.</span></a>
+
+    <div class="navlinks">
+        <a href="#destinations">Destinations</a>
+        <a href="#experiences">Experiences</a>
+        <a href="#hotels">Stays</a>
+        <a href="#food">Food</a>
+        <a href="#guides">Guides</a>
+        <a href="#planner">Plan My Trip</a>
+    </div>
+
+    <div class="nav-actions">
+        <button class="icon-btn" onclick="showToast('Wishlist opened ♡')">♡</button>
+        <button class="icon-btn" onclick="openModal()">♧</button>
+        <button class="icon-btn menu" aria-label="Open mobile menu" onclick="toggleMobileMenu()">☰</button>
+    </div>
+
+</nav>
+
+<div class="mobile-nav-panel" id="mobileNavPanel">
+    <a href="#destinations">Destinations</a>
+    <a href="#experiences">Experiences</a>
+    <a href="#hotels">Stays</a>
+    <a href="#food">Food</a>
+    <a href="#guides">Guides</a>
+    <a href="#planner">Plan My Trip</a>
+</div>
+
+
+<!-- HERO -->
+
+<header class="hero">
+
+    <div class="hero-content">
+
+        <div class="eyebrow">Luxury travel • Curated experiences</div>
+
+        <h1>
+            Go somewhere<br>
+            worth <em>remembering.</em>
+        </h1>
+
+        <p class="hero-text">
+            Discover extraordinary places, beautiful stays and unforgettable
+            experiences — thoughtfully brought together in one seamless journey.
+        </p>
+
+        <button class="primary-btn" onclick="scrollToSection('planner')">
+            Begin Your Journey →
+        </button>
+
+        <button class="secondary-btn" onclick="scrollToSection('destinations')">
+            Explore Destinations
+        </button>
+
+    </div>
+
+
+    <!-- SEARCH -->
+
+    <div class="search-panel">
+
+        <div class="search-field">
+            <label>WHERE</label>
+            <input id="searchDestination" placeholder="Destination">
+        </div>
+
+        <div class="search-field">
+            <label>WHEN</label>
+            <input type="date">
+        </div>
+
+        <div class="search-field">
+            <label>TRAVELERS</label>
+            <select>
+                <option>2 Travelers</option>
+                <option>1 Traveler</option>
+                <option>3 Travelers</option>
+                <option>4 Travelers</option>
+                <option>5+ Travelers</option>
+            </select>
+        </div>
+
+        <div class="search-field">
+            <label>STYLE</label>
+            <select>
+                <option>Luxury</option>
+                <option>Adventure</option>
+                <option>Romantic</option>
+                <option>Family</option>
+                <option>Solo</option>
+            </select>
+        </div>
+
+        <button class="search-btn" onclick="searchTrip()">SEARCH</button>
+
+    </div>
+
+</header>
+
+
+<!-- DESTINATIONS -->
+
+<section id="destinations" class="reveal">
+
+    <div class="section-head">
+
+        <div>
+            <div class="eyebrow" style="color:#a18448;">Where to next</div>
+            <h2>Destinations<br>worth discovering.</h2>
+        </div>
+
+        <div>
+            <p>
+                From tropical islands to ancient cities,
+                discover places selected for travelers who want more
+                than ordinary.
+            </p>
+            <br>
+            <a href="#" class="view-link">View all destinations →</a>
+        </div>
+
+    </div>
+
+
+    <div class="destination-grid">
+
+        <div class="destination">
+            <img src="https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=1200&q=85">
+            <div class="destination-info">
+                <small>Indonesia</small>
+                <h3>Bali</h3>
+            </div>
+        </div>
+
+        <div class="destination">
+            <img src="https://images.unsplash.com/photo-1500534623283-312aade485b7?auto=format&fit=crop&w=900&q=85">
+            <div class="destination-info">
+                <small>Europe</small>
+                <h3>Amalfi</h3>
+            </div>
+        </div>
+
+        <div class="destination">
+            <img src="https://images.unsplash.com/photo-1528181304800-259b08848526?auto=format&fit=crop&w=900&q=85">
+            <div class="destination-info">
+                <small>Thailand</small>
+                <h3>Phuket</h3>
+            </div>
+        </div>
+
+        <div class="destination">
+            <img src="https://images.unsplash.com/photo-1526772662000-3f88f10405ff?auto=format&fit=crop&w=900&q=85">
+            <div class="destination-info">
+                <small>Middle East</small>
+                <h3>Dubai</h3>
+            </div>
+        </div>
+
+        <div class="destination">
+            <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=900&q=85">
+            <div class="destination-info">
+                <small>South Asia</small>
+                <h3>Sri Lanka</h3>
+            </div>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- TRAVEL STYLES -->
+
+<section class="styles reveal">
+
+    <div class="section-head">
+
+        <div>
+            <div class="eyebrow">Find your way</div>
+            <h2>Travel your way.</h2>
+        </div>
+
+        <p>
+            Every traveler has a different idea of the perfect escape.
+            Choose a mood and we'll take it from there.
+        </p>
+
+    </div>
+
+
+    <div class="style-grid">
+
+        <div class="style-card">
+            <img src="https://images.unsplash.com/photo-1540541338287-41700207dee6?auto=format&fit=crop&w=700&q=80">
+            <div>
+                <h3>Luxury</h3>
+                <p>Stay extraordinary</p>
+            </div>
+        </div>
+
+        <div class="style-card">
+            <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=700&q=80">
+            <div>
+                <h3>Adventure</h3>
+                <p>Chase the wild</p>
+            </div>
+        </div>
+
+        <div class="style-card">
+            <img src="https://images.unsplash.com/photo-1516483638261-f4dbaf036963?auto=format&fit=crop&w=700&q=80">
+            <div>
+                <h3>Romantic</h3>
+                <p>For two</p>
+            </div>
+        </div>
+
+        <div class="style-card">
+            <img src="https://images.unsplash.com/photo-1504150558240-0b4fd8946624?auto=format&fit=crop&w=700&q=80">
+            <div>
+                <h3>Solo</h3>
+                <p>Find yourself</p>
+            </div>
+        </div>
+
+        <div class="style-card">
+            <img src="https://images.unsplash.com/photo-1494783367193-149034c05e8f?auto=format&fit=crop&w=700&q=80">
+            <div>
+                <h3>Nature</h3>
+                <p>Breathe deeper</p>
+            </div>
+        </div>
+
+        <div class="style-card">
+            <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=700&q=80">
+            <div>
+                <h3>Beach</h3>
+                <p>Slow down</p>
+            </div>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- TRIP BUILDER -->
+
+<section id="planner" class="builder reveal">
+
+    <div class="builder-box">
+
+        <div class="builder-image"></div>
+
+        <div class="builder-content">
+
+            <div class="eyebrow" style="color:#a18448;">The VOYA planner</div>
+
+            <h2>Your trip.<br>Your way.</h2>
+
+            <p>
+                Tell us what you love, how you travel and what you want
+                to experience. We'll turn your preferences into a
+                beautifully structured journey.
+            </p>
+
+            <div class="progress">
+                <span id="progress"></span>
+            </div>
+
+
+            <div class="builder-step active">
+
+                <h3>Where would you like to go?</h3>
+
+                <div class="options">
+                    <button class="option" onclick="selectOption(this)">Bali</button>
+                    <button class="option" onclick="selectOption(this)">Japan</button>
+                    <button class="option" onclick="selectOption(this)">Italy</button>
+                    <button class="option" onclick="selectOption(this)">Dubai</button>
+                    <button class="option" onclick="selectOption(this)">Maldives</button>
+                </div>
+
+            </div>
+
+
+            <div class="builder-step">
+
+                <h3>What kind of experience?</h3>
+
+                <div class="options">
+                    <button class="option" onclick="selectOption(this)">Food</button>
+                    <button class="option" onclick="selectOption(this)">Adventure</button>
+                    <button class="option" onclick="selectOption(this)">Culture</button>
+                    <button class="option" onclick="selectOption(this)">Nature</button>
+                    <button class="option" onclick="selectOption(this)">Relaxation</button>
+                    <button class="option" onclick="selectOption(this)">Shopping</button>
+                </div>
+
+            </div>
+
+
+            <div class="builder-step">
+
+                <h3>What's your travel pace?</h3>
+
+                <div class="options">
+                    <button class="option" onclick="selectOption(this)">Slow & Relaxed</button>
+                    <button class="option" onclick="selectOption(this)">Balanced</button>
+                    <button class="option" onclick="selectOption(this)">Packed & Exciting</button>
+                </div>
+
+            </div>
+
+
+            <div class="builder-step">
+
+                <h3>Your journey is ready.</h3>
+
+                <p>
+                    We've created a personalized travel concept based
+                    on your choices.
+                </p>
+
+                <button class="primary-btn" onclick="showToast('Your personalized itinerary is being created ✦')">
+                    Generate My Journey
+                </button>
+
+            </div>
+
+
+            <div class="builder-footer">
+                <button class="secondary-btn" style="color:var(--green);border-color:var(--green);margin:0" onclick="previousStep()">← Back</button>
+                <button class="primary-btn" onclick="nextStep()">Continue →</button>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- EXPERIENCES -->
+
+<section id="experiences" class="reveal">
+
+    <div class="section-head">
+
+        <div>
+            <div class="eyebrow" style="color:#a18448;">Beyond sightseeing</div>
+            <h2>Experiences<br>to remember.</h2>
+        </div>
+
+        <a href="#" class="view-link">Explore experiences →</a>
+
+    </div>
+
+
+    <div class="experience-grid">
+
+        <div class="experience">
+
+            <div class="experience-img">
+                <img src="https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?auto=format&fit=crop&w=900&q=85">
+                <button class="heart" onclick="toggleHeart(this)">♡</button>
+            </div>
+
+            <div class="experience-content">
+                <span class="tag">Bali • Nature</span>
+                <h3>Sunrise at Mount Batur</h3>
+                <div class="rating">★★★★★ 4.9</div>
+                <div class="price">
+                    <strong>₹4,900</strong>
+                    <small>per person</small>
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class="experience">
+
+            <div class="experience-img">
+                <img src="https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=900&q=85">
+                <button class="heart" onclick="toggleHeart(this)">♡</button>
+            </div>
+
+            <div class="experience-content">
+                <span class="tag">Tokyo • Food</span>
+                <h3>Hidden Izakaya Evening</h3>
+                <div class="rating">★★★★★ 4.8</div>
+                <div class="price">
+                    <strong>₹7,200</strong>
+                    <small>per person</small>
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class="experience">
+
+            <div class="experience-img">
+                <img src="https://images.unsplash.com/photo-1512100356356-de1b84283e18?auto=format&fit=crop&w=900&q=85">
+                <button class="heart" onclick="toggleHeart(this)">♡</button>
+            </div>
+
+            <div class="experience-content">
+                <span class="tag">Maldives • Water</span>
+                <h3>Private Lagoon Escape</h3>
+                <div class="rating">★★★★★ 5.0</div>
+                <div class="price">
+                    <strong>₹12,500</strong>
+                    <small>per person</small>
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class="experience">
+
+            <div class="experience-img">
+                <img src="https://images.unsplash.com/photo-1504150558240-0b4fd8946624?auto=format&fit=crop&w=900&q=85">
+                <button class="heart" onclick="toggleHeart(this)">♡</button>
+            </div>
+
+            <div class="experience-content">
+                <span class="tag">Italy • Culture</span>
+                <h3>Private Tuscan Vineyard</h3>
+                <div class="rating">★★★★★ 4.9</div>
+                <div class="price">
+                    <strong>₹18,900</strong>
+                    <small>per person</small>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- HOTELS -->
+
+<section id="hotels" class="hotels reveal">
+
+    <div class="section-head">
+
+        <div>
+            <div class="eyebrow" style="color:#a18448;">Beautiful stays</div>
+            <h2>Stay somewhere<br>special.</h2>
+        </div>
+
+        <a href="#" class="view-link">View all stays →</a>
+
+    </div>
+
+
+    <div class="hotel-grid">
+
+        <div class="hotel">
+
+            <div class="hotel-image">
+                <img src="https://images.unsplash.com/photo-1602002418082-a4443e081dd1?auto=format&fit=crop&w=1000&q=85">
+            </div>
+
+            <div class="hotel-content">
+                <span class="tag">Bali • Ubud</span>
+                <h3>Mandapa Reserve</h3>
+                <p class="hotel-location">River valley • Private villas</p>
+
+                <div class="amenities">
+                    <span>Pool</span>
+                    <span>Spa</span>
+                    <span>Breakfast</span>
+                </div>
+
+                <div class="price">
+                    <strong>₹42,000</strong>
+                    <small>/ night</small>
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class="hotel">
+
+            <div class="hotel-image">
+                <img src="https://images.unsplash.com/photo-1564501049412-61c2a3083791?auto=format&fit=crop&w=1000&q=85">
+            </div>
+
+            <div class="hotel-content">
+                <span class="tag">Maldives • North Malé</span>
+                <h3>Azure Private Island</h3>
+                <p class="hotel-location">Overwater villas • Ocean view</p>
+
+                <div class="amenities">
+                    <span>Beach</span>
+                    <span>Spa</span>
+                    <span>Villa</span>
+                </div>
+
+                <div class="price">
+                    <strong>₹58,000</strong>
+                    <small>/ night</small>
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class="hotel">
+
+            <div class="hotel-image">
+                <img src="https://images.unsplash.com/photo-1601918774946-25832a4be0d6?auto=format&fit=crop&w=1000&q=85">
+            </div>
+
+            <div class="hotel-content">
+                <span class="tag">Italy • Amalfi</span>
+                <h3>Casa Bellavista</h3>
+                <p class="hotel-location">Cliffside • Mediterranean view</p>
+
+                <div class="amenities">
+                    <span>Terrace</span>
+                    <span>Pool</span>
+                    <span>Restaurant</span>
+                </div>
+
+                <div class="price">
+                    <strong>₹36,500</strong>
+                    <small>/ night</small>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- FOOD -->
+
+<section id="food" class="food reveal">
+
+    <div class="food-image"></div>
+
+    <div class="food-content">
+
+        <div class="eyebrow" style="color:#a18448;">Taste the destination</div>
+
+        <h2>Some journeys<br>are meant<br>to be tasted.</h2>
+
+        <p>
+            Discover the restaurants, cafés, markets and hidden food spots
+            that make a destination unforgettable.
+        </p>
+
+        <div class="food-list">
+
+            <div class="food-item">
+                <strong>Fine Dining</strong>
+                <span>Michelin-inspired experiences</span>
+            </div>
+
+            <div class="food-item">
+                <strong>Local Food</strong>
+                <span>Eat where locals eat</span>
+            </div>
+
+            <div class="food-item">
+                <strong>Hidden Cafés</strong>
+                <span>Beautiful coffee spots</span>
+            </div>
+
+            <div class="food-item">
+                <strong>Street Food</strong>
+                <span>Authentic local flavors</span>
+            </div>
+
+        </div>
+
+        <button class="primary-btn" onclick="showToast('Opening food discovery ✦')">
+            Discover Local Food →
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- GUIDES -->
+
+<section id="guides" class="reveal">
+
+    <div class="section-head">
+
+        <div>
+            <div class="eyebrow" style="color:#a18448;">VOYA Journal</div>
+            <h2>Stories for<br>curious travelers.</h2>
+        </div>
+
+        <a href="#" class="view-link">Read all guides →</a>
+
+    </div>
+
+
+    <div class="guide-grid">
+
+        <div class="guide">
+
+            <img src="https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=1200&q=85">
+
+            <div class="guide-info">
+                <small>Destination Guide</small>
+                <h3>48 hours in Ubud: a slower way to experience Bali</h3>
+            </div>
+
+        </div>
+
+
+        <div class="guide">
+
+            <img src="https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=800&q=85">
+
+            <div class="guide-info">
+                <small>Culture</small>
+                <h3>Japan beyond Tokyo</h3>
+            </div>
+
+        </div>
+
+
+        <div class="guide">
+
+            <img src="https://images.unsplash.com/photo-1530789253388-582c481c54b0?auto=format&fit=crop&w=800&q=85">
+
+            <div class="guide-info">
+                <small>Planning</small>
+                <h3>How to plan the perfect escape</h3>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- BUDGET -->
+
+<section class="budget reveal">
+
+    <div class="eyebrow">Know before you go</div>
+
+    <h2>Beautiful trips.<br>Thoughtful budgets.</h2>
+
+    <p>
+        Keep your entire journey in view — accommodation, food,
+        experiences, transportation and everything between.
+    </p>
+
+
+    <div class="budget-box">
+
+        <div class="budget-item">
+            <small>Hotels</small>
+            <strong>₹48,000</strong>
+        </div>
+
+        <div class="budget-item">
+            <small>Food</small>
+            <strong>₹16,500</strong>
+        </div>
+
+        <div class="budget-item">
+            <small>Experiences</small>
+            <strong>₹12,800</strong>
+        </div>
+
+        <div class="budget-item">
+            <small>Transport</small>
+            <strong>₹9,200</strong>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- TESTIMONIAL -->
+
+<section class="reveal">
+
+    <div class="testimonial">
+
+        <div class="eyebrow" style="color:#a18448;">Traveler stories</div>
+
+        <div class="quote">
+            “VOYA didn't just help us plan a trip.
+            It helped us create a collection of moments
+            we'll remember forever.”
+        </div>
+
+        <div class="quote-author">
+            — Ananya & Arjun • 12 days across Japan
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- NEWSLETTER -->
+
+<section class="newsletter reveal">
+
+    <div class="eyebrow" style="color:#a18448;">The VOYA edit</div>
+
+    <h2>Beautiful places,<br>delivered occasionally.</h2>
+
+    <p>
+        New destinations, hidden stays and travel inspiration —
+        without the noise.
+    </p>
+
+    <form class="newsletter-form" onsubmit="subscribe(event)">
+        <input type="email" id="email" placeholder="Your email address" required>
+        <button class="primary-btn">Subscribe</button>
+    </form>
+
+</section>
+
+
+<!-- FOOTER -->
+
+<footer>
+
+    <div class="footer-grid">
+
+        <div class="footer-brand">
+
+            <div class="logo">VOYA<span>.</span></div>
+
+            <p>
+                Travel, beautifully planned.
+                Discover extraordinary destinations,
+                stays and experiences curated for modern travelers.
+            </p>
+
+        </div>
+
+
+        <div>
+            <h4>Explore</h4>
+            <a href="#destinations">Destinations</a>
+            <a href="#experiences">Experiences</a>
+            <a href="#hotels">Stays</a>
+            <a href="#food">Restaurants</a>
+        </div>
+
+
+        <div>
+            <h4>Plan</h4>
+            <a href="#planner">Trip Builder</a>
+            <a href="#">My Trips</a>
+            <a href="#">Wishlist</a>
+            <a href="#">Travel Checklist</a>
+        </div>
+
+
+        <div>
+            <h4>VOYA</h4>
+            <a href="#">About</a>
+            <a href="#">Journal</a>
+            <a href="#">Contact</a>
+            <a href="#">Privacy</a>
+        </div>
+
+    </div>
+
+
+    <div class="footer-bottom">
+
+        <span>© 2026 VOYA Travel Studio</span>
+
+        <span>Made for travelers who collect moments.</span>
+
+    </div>
+
+</footer>
+
+
+<!-- MODAL -->
+
+<div class="modal" id="modal">
+
+    <div class="modal-box">
+
+        <button class="close" onclick="closeModal()">×</button>
+
+        <div class="eyebrow" style="color:#a18448;">Plan with VOYA</div>
+
+        <h2>Let's create your escape.</h2>
+
+        <p>
+            Tell us a little about your next journey and
+            we'll prepare a personalized travel concept.
+        </p>
+
+        <div class="form-group">
+            <label>DESTINATION</label>
+            <input id="modalDestination" placeholder="Where do you want to go?">
+        </div>
+
+        <div class="form-group">
+            <label>TRAVEL STYLE</label>
+            <select>
+                <option>Luxury Escape</option>
+                <option>Adventure</option>
+                <option>Romantic</option>
+                <option>Family</option>
+                <option>Solo</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>BUDGET</label>
+            <select>
+                <option>₹50,000 – ₹1,00,000</option>
+                <option>₹1,00,000 – ₹2,00,000</option>
+                <option>₹2,00,000 – ₹5,00,000</option>
+                <option>₹5,00,000+</option>
+            </select>
+        </div>
+
+        <button class="primary-btn" onclick="createTrip()">
+            Create My Journey →
+        </button>
+
+    </div>
+
+</div>
+
+
+<div class="toast" id="toast"></div>
+
+<nav class="mobile-tabbar" aria-label="Mobile app navigation">
+    <a href="#"><strong>⌂</strong>Home</a>
+    <a href="#destinations"><strong>✦</strong>Explore</a>
+    <a href="#planner"><strong>✈</strong>Trips</a>
+    <a href="#hotels"><strong>♡</strong>Saved</a>
+</nav>
+
+<script>
+
+/* NAVBAR */
+
+window.addEventListener("scroll",()=>{
+    const navbar=document.getElementById("navbar");
+
+    if(window.scrollY>50){
+        navbar.classList.add("scrolled");
+    }else{
+        navbar.classList.remove("scrolled");
+    }
+});
+
+
+/* SCROLL */
+
+function scrollToSection(id){
+    document.getElementById(id).scrollIntoView({
+        behavior:"smooth"
+    });
+}
+
+
+/* SEARCH */
+
+function searchTrip(){
+
+    const destination=document
+        .getElementById("searchDestination")
+        .value
+        .trim();
+
+    if(!destination){
+        showToast("Please enter a destination.");
+        return;
+    }
+
+    showToast("Searching beautiful experiences in "+destination+" ✦");
+
+}
+
+
+/* TOAST */
+
+function showToast(message){
+
+    const toast=document.getElementById("toast");
+
+    toast.textContent=message;
+
+    toast.classList.add("show");
+
+    setTimeout(()=>{
+        toast.classList.remove("show");
+    },3000);
+
+}
+
+
+/* WISHLIST */
+
+function toggleHeart(button){
+
+    if(button.textContent==="♡"){
+        button.textContent="♥";
+        showToast("Added to your wishlist ♡");
+    }else{
+        button.textContent="♡";
+        showToast("Removed from wishlist");
+    }
+
+}
+
+
+/* MODAL */
+
+function openModal(){
+
+    document
+        .getElementById("modal")
+        .classList.add("active");
+
+}
+
+function closeModal(){
+
+    document
+        .getElementById("modal")
+        .classList.remove("active");
+
+}
+
+function createTrip(){
+
+    const destination=document
+        .getElementById("modalDestination")
+        .value
+        .trim();
+
+    if(!destination){
+
+        showToast("Please enter your destination.");
+
+        return;
+    }
+
+    closeModal();
+
+    showToast("Your "+destination+" journey is being prepared ✦");
+
+}
+
+
+/* TRIP BUILDER */
+
+let currentStep=0;
+
+const steps=document.querySelectorAll(".builder-step");
+
+function updateBuilder(){
+
+    steps.forEach((step,index)=>{
+
+        step.classList.toggle(
+            "active",
+            index===currentStep
+        );
+
+    });
+
+    document.getElementById("progress").style.width=
+        ((currentStep+1)/steps.length*100)+"%";
+
+}
+
+function nextStep(){
+
+    if(currentStep<steps.length-1){
+
+        currentStep++;
+
+        updateBuilder();
+
+    }else{
+
+        showToast("Your journey is ready to personalize ✦");
+
+    }
+
+}
+
+function previousStep(){
+
+    if(currentStep>0){
+
+        currentStep--;
+
+        updateBuilder();
+
+    }
+
+}
+
+function selectOption(button){
+
+    const parent=button.parentElement;
+
+    parent
+        .querySelectorAll(".option")
+        .forEach(item=>item.classList.remove("selected"));
+
+    button.classList.add("selected");
+
+}
+
+
+/* NEWSLETTER */
+
+function subscribe(event){
+
+    event.preventDefault();
+
+    const email=document
+        .getElementById("email")
+        .value;
+
+    showToast("Welcome to the VOYA edit, "+email+" ✦");
+
+    event.target.reset();
+
+}
+
+
+/* SCROLL REVEAL */
+
+const observer=new IntersectionObserver(
+    entries=>{
+
+        entries.forEach(entry=>{
+
+            if(entry.isIntersecting){
+
+                entry.target.classList.add("visible");
+
+            }
+
+        });
+
+    },
+    {threshold:.12}
+);
+
+document
+    .querySelectorAll(".reveal")
+    .forEach(element=>observer.observe(element));
+
+
+/* ESCAPE KEY */
+
+document.addEventListener("keydown",event=>{
+
+    if(event.key==="Escape"){
+
+        closeModal();
+
+    }
+
+});
+
+
+/* MOBILE MENU */
+
+function toggleMobileMenu(){
+    const panel=document.getElementById("mobileNavPanel");
+    panel.classList.toggle("show");
+}
+
+document
+    .querySelector(".menu")
+    .addEventListener("click",()=>{
+
+        toggleMobileMenu();
+
+    });
+
+</script>
+
+</body>
+</html>
+```
